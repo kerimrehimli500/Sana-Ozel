@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Sadece Sen</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 100%);
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.box {
+  max-width: 600px;
+  padding: 20px;
+}
+
+.box h1 {
+   font-size: 48px;
+  color: #fffb00; /* Neon sarı */
+  text-shadow:
+     2px 2px 4px rgba(0,0,0,0.6),
+    -2px 2px 4px rgba(0,0,0,0.6),
+     2px -2px 4px rgba(0,0,0,0.6),
+    -2px -2px 4px rgba(0,0,0,0.6);
+  animation: neonGlow 2s infinite alternate;
+ @keyframes neonGlow {
+  0%, 100% { text-shadow: 0 0 2px currentColor, 0 0 4px currentColor, 0 0 8px currentColor; }
+  50% { text-shadow: 0 0 3px currentColor, 0 0 6px currentColor, 0 0 12px currentColor; }
+}}
+
+.box p {
+   font-size: 22px;
+  color: #ff66cc; /* Neon pembe */
+  text-shadow:
+     1px 1px 3px rgba(0,0,0,0.6),
+    -1px 1px 3px rgba(0,0,0,0.6),
+     1px -1px 3px rgba(0,0,0,0.6),
+    -1px -1px 3px rgba(0,0,0,0.6);
+  animation: neonGlow 2s infinite alternate;
+  @keyframes neonGlow {
+  0%, 100% { text-shadow: 0 0 2px currentColor, 0 0 4px currentColor, 0 0 8px currentColor; }
+  50% { text-shadow: 0 0 3px currentColor, 0 0 6px currentColor, 0 0 12px currentColor; }
+}}
+
+.box h1, .box p {
+  animation: neonGlow 2s infinite alternate;
+}
+
+@keyframes neonGlow {
+  0%,100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.6), -2px 2px 4px rgba(0,0,0,0.6), 2px -2px 4px rgba(0,0,0,0.6), -2px -2px 4px rgba(0,0,0,0.6); }
+  50% { text-shadow: 2px 2px 6px rgba(0,0,0,0.6), -2px 2px 6px rgba(0,0,0,0.6), 2px -2px 6px rgba(0,0,0,0.6), -2px -2px 6px rgba(0,0,0,0.6); }
+}
+
+#devamBtn {
+  margin-top: 20px;
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #ff66cc, #fffb00); /* site renkleriyle uyumlu */
+  border: none;
+  border-radius: 8px; /* hafif yuvarlak, abartısız */
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 102, 204, 0.5), 0 4px 20px rgba(255, 251, 0, 0.5); /* hafif glow */
+  transition: all 0.3s ease;
+}
+
+#devamBtn:hover {
+  transform: scale(1.05); /* hoverda biraz büyüsün */
+  box-shadow: 0 6px 15px rgba(255, 102, 204, 0.7), 0 6px 25px rgba(255, 251, 0, 0.7);
+}
+
+#devamBtn:active {
+  transform: scale(0.95); /* basınca hafif küçülme efekti */
+  box-shadow: 0 3px 8px rgba(255, 102, 204, 0.5), 0 3px 15px rgba(255, 251, 0, 0.5);
+}
+
+
+.hidden {
+  display: none;
+}
+
+.falling {
+  position: fixed;
+  top: -50px;
+  font-size: 24px;
+  animation: fall linear forwards;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box" id="first">
+  <h1>Bu site herkese açık değil.</h1>
+  <p>Ama sana kalbim bile açık 😝🥰</p>
+  <button id="devamBtn">Devam et</button>
+</div>
+
+<div class="box hidden" id="second">
+  <p>
+    Aramızda mesafe olsa da mene en yaxın adam sensen.<br><br>
+    Günün her saatı, deqiqesi ve her saniyesi ağlımdasan aşkım.<br><br>
+    Elediyim şey balaca olsa da tam ve saf sevgimle eledim.<br><br>
+    Seni HER ŞEYDEN çox sevirem AŞKIM.<br><br>
+    Yaxşı ki varsan gözəlim, birtanemsin 😝🥰😍
+  </p>
+  <p style="margin-top:20px;">4cü Ayımız Kutlu Olsun🥳😚🥹</p>
+</div>
+
+<script>
+document.getElementById("devamBtn").addEventListener("click", function () {
+  document.getElementById("first").style.display = "none";
+  document.getElementById("second").classList.remove("hidden");
+
+  // animasyonu başlat
+  setInterval(createFalling, 300);
+});
+
+function createFalling() {
+  const items = ["❤️", "🌸", "🌹", "💖"];
+  const el = document.createElement("div");
+  el.className = "falling";
+  el.innerText = items[Math.floor(Math.random() * items.length)];
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.animationDuration = 4 + Math.random() * 3 + "s";
+  document.body.appendChild(el);
+
+  setTimeout(() => {
+    el.remove();
+  }, 7000);
+}
+</script>
+
+</body>
+</html>
